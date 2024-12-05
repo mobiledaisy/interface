@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>21</title>
+ <style>
+   .container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 50px;
+     height: 100vh;
+     background-color: #f0f0f0;
+   }
+   .block {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+   }
+   .card {
+     width: 100px;
+     height: 150px;
+     background-size: cover;
+     background-position: center;
+     margin-top: 10px;
+   }
+   .button {
+     padding: 15px 30px;
+     background-color: pink;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     margin-bottom: 20px;
+     color: white;
+     display: flex;
+     justify-content: center;
+   }
+   a {
+    text-decoration: none;
+    color: white;
+   }
+   .btn {
+    background-color: plum;
+    padding: 15px 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+  }
+ </style>
+</head>
+<body>
+ <div class="container">
+   <div class="user block">
+     <h3 class="name player">Name</h3>
+     <div class="score">
+       <p class="scoreText scoreTextUser">Score: 0</p>
+     </div>
+     <div class="card cardUser"></div>
+   </div>
+   <div>
+     <div class="button">Generate</div>
+     <div class="button"><a href="./index.html">Home</a></div>
+     <div class="amount">Attempt: 0 of 3</div>
+   </div>
+   <div class="computer block">
+     <h3 class="player">Computer</h3>
+     <div class="score">
+       <p class="scoreText scoreTextComputer">Score: 0</p>
+     </div>
+     <div class="card cardComputer"></div>
+   </div>
+ </div>
+ <script>
+   let userName;
+
+
+   const getUserName = () => {
+     while (!userName) {
+       userName = prompt("Please enter your name:")?.trim();
+       if (!userName) {
+         alert("You have not entered your name");
+       }
+     }
+     document.querySelector('.name').textContent = userName;
+   };
+
+
+   const generateRandomNumber = () => {
+     const numbers = [2, 3, 4, 6, 7, 8, 9, 10, 11];
+     const randomIndex = Math.floor(Math.random() * numbers.length);
+     return numbers[randomIndex];
+   };
+
+
+   const cards = {
+     6: './6.svg',
+     7: './7.svg',
+     8: './8.svg',
+     9: './9.svg',
+     10: './10.svg',
+     2: './jack.svg',
+     3: './queen.svg',
+     4: './king.svg',
+     11: './ace.svg'
+   };
+
+
+   const score = {
+     user: 0,
+     computer: 0,
+   };
+
+
+   const updateText = () => {
+     document.querySelector('.scoreTextUser').textContent = `Score: ${score.user}`;
+     document.querySelector('.scoreTextComputer').textContent = `Score: ${score.computer}`;
+     document.querySelector('.amount').textContent = `Attempt: ${amount} of 3`;
+   };
+
+
+   let amount = 0;
+
+
+   const check = () => {
+     if (amount === 3) {
+       if (score.user > score.computer) {
+         alert(`${userName} has won!`);
+       } else if (score.user < score.computer) {
+         alert('Computer has won!');
+       } else {
+         alert('No one has won')
+       }
+       reset();
+     }
+   };
+  
+   const reset = () => {
+     score.user = 0;
+     score.computer = 0;
+     amount = 0;
+     updateText();
+   };
+
+
+   document.querySelector('.button').addEventListener('click', () => {
+     amount++;
+     const userNumber = generateRandomNumber();
+     const computerNumber = generateRandomNumber();
+
+
+     document.querySelector('.cardUser').style.backgroundImage = `url(${cards[userNumber]})`;
+     document.querySelector('.cardComputer').style.backgroundImage = `url(${cards[computerNumber]})`;
+
+
+     if (userNumber > computerNumber) {
+       score.user += userNumber;
+     } else if (userNumber < computerNumber) {
+       score.computer += computerNumber;
+     }
+     updateText();
+     check();
+   });
+
+
+   getUserName();
+ </script>
+</body>
+</html>

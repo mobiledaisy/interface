@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Game</title>
+ <style>
+   body {
+     font-family: Arial, sans-serif;
+     background-color: #f0f0f0;
+   }
+   .container {
+     display: flex;
+     justify-content: center;
+     gap: 50px;
+     padding: 20px;
+   }
+   .block {
+     background-color: white;
+     border: 2px solid pink;
+     border-radius: 8px;
+     padding: 20px;
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+   }
+   .button {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding: 15px 30px;
+     background-color: pink;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     height: 30px;
+     transition: background-color 0.3s;
+   }
+   .button:hover {
+     background-color: rgb(238, 163, 175);
+   }
+   .btn {
+    background-color: plum;
+    padding: 15px 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+  }
+  .cont_btn {
+    display: flex;
+    justify-content: center;
+  }
+ </style>
+</head>
+<body>
+  <div class="cont_btn">
+    <a href="./index.html" class="btn">Go to Home</a>
+  </div>
+ <div class="container">
+   <div class="user block">
+     <h3 class="name player">Name</h3>
+     <div class="score">
+       <p class="scoreText scoreTextUser">Score: -</p>
+     </div>
+     <div class="number">
+       <p class="numberText numberTextUser">Number: -</p>
+     </div>
+   </div>
+   <div class="button">Generate</div>
+   <div class="computer block">
+     <h3 class="player">Computer</h3>
+     <div class="score">
+       <p class="scoreText scoreTextComputer">Score: -</p>
+     </div>
+     <div class="number">
+       <p class="numberText numberTextComputer">Number -</p>
+     </div>
+   </div>
+ </div>
+  <script>
+   let userName;
+
+
+   const getUserName = () => {
+     while (!userName) {
+       userName = prompt("Please enter your name:")?.trim();
+       if (!userName) {
+         alert("You have not entered your name");
+       }
+     }
+     document.querySelector('.name').textContent = userName;
+   };
+
+
+   const generateRandomNumber = () => Math.floor(Math.random() * 9) + 1;
+
+
+   const score = {
+     user: 0,
+     computer: 0,
+   };
+
+
+   const updateScoreText = () => {
+     document.querySelector('.scoreTextUser').textContent = `Score: ${score.user}`;
+     document.querySelector('.scoreTextComputer').textContent = `Score: ${score.computer}`;
+   };
+
+
+   const checkResult = () => {
+     if (score.user === 3) {
+       alert(`${userName} has won!`);
+       resetScore();
+     } else if (score.computer === 3) {
+       alert('Computer has won!');
+       resetScore();
+     }
+   };
+
+
+   const resetScore = () => {
+     score.user = 0;
+     score.computer = 0;
+     updateScoreText();
+   };
+
+
+   document.querySelector('.button').addEventListener('click', () => {
+     const userNumber = generateRandomNumber();
+     const computerNumber = generateRandomNumber();
+
+
+     document.querySelector('.numberTextUser').textContent = `Number: ${userNumber}`;
+     document.querySelector('.numberTextComputer').textContent = `Number: ${computerNumber}`;
+
+
+     if (userNumber > computerNumber) {
+       score.user++;
+     } else if (userNumber < computerNumber) {
+       score.computer++;
+     }
+     updateScoreText();
+     checkResult();
+   });
+
+
+   getUserName();
+ </script>
+</body>
+</html>

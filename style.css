@@ -1,0 +1,12 @@
+body {
+  background-image: url(./background.jpg);
+}
+
+.card-img-top {
+  max-height: 350px;
+  object-fit: cover;
+}
+
+.btn-primary {
+  background-color: plum !important;
+}

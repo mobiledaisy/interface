@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Magic Ball</title>
+</head>
+<style>
+  .btn {
+    background-color: plum;
+    padding: 15px 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+  }
+  .cont_btn {
+    display: flex;
+    justify-content: center;
+  }
+</style>
+<body>
+  <div class="cont_btn">
+    <a href="./index.html" class="btn">Go to Home</a>
+  </div>
+ <script>
+   const magicBallContainer = document.createElement('div');
+   magicBallContainer.style.display = 'flex';
+   magicBallContainer.style.flexDirection = 'column';
+   magicBallContainer.style.justifyContent = 'center';
+   magicBallContainer.style.alignItems = 'center';
+   magicBallContainer.style.height = '100vh';
+   magicBallContainer.style.backgroundColor = 'black';
+
+
+   const text = document.createElement('p');
+   text.textContent = 'ASK YOUR QUESTION';
+   text.style.color = 'white';
+   text.style.fontSize = '40px';
+   text.style.textAlign = 'center';
+   text.style.textShadow = '0 0 5px rgba(0, 0, 255, 0.7), 0 0 10px rgba(0, 0, 255, 0.9)';
+
+
+   const magicBall = document.createElement('div');
+   magicBall.style.position = 'relative';
+   magicBall.style.width = '300px';
+   magicBall.style.height = '300px';
+   magicBall.style.borderRadius = '50%';
+   magicBall.style.backgroundImage = 'url("./magicball.png")';
+   magicBall.style.backgroundSize = 'cover';
+   magicBall.style.backgroundPosition = 'center';
+   magicBall.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.3)';
+
+
+   const button = document.createElement('button');
+   button.textContent = 'Press';
+   button.style.color = 'white';
+   button.style.fontFamily = 'Times';
+   button.style.marginTop = '20px';
+   button.style.padding = '10px 20px';
+   button.style.fontSize = '18px';
+   button.style.cursor = 'pointer';
+   button.style.backgroundColor = 'black';
+   button.style.border = '1px solid gray'
+   button.style.textShadow = '0 0 5px rgba(0, 0, 255, 0.7), 0 0 10px rgba(0, 0, 255, 0.9)';
+
+
+   button.addEventListener('mouseenter', () => {
+     magicBall.style.boxShadow = '0 0 60px rgba(255, 255, 255, 0.8), 0 0 100px rgba(255, 255, 255, 0.5)';
+   });
+
+
+   button.addEventListener('mouseleave', () => {
+     magicBall.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.3)';
+   });
+
+
+   const answerDisplay = document.createElement('p');
+   answerDisplay.style.position = 'absolute';
+   answerDisplay.style.top = '45%';
+   answerDisplay.style.left = '50%';
+   answerDisplay.style.transform = 'translate(-50%, -50%)';
+   answerDisplay.style.color = 'white';
+   answerDisplay.style.fontSize = '24px';
+   answerDisplay.style.textAlign = 'center';
+   answerDisplay.style.width = '100%';
+   answerDisplay.style.textShadow = '0 0 5px rgba(0, 0, 255, 0.7), 0 0 10px rgba(0, 0, 255, 0.9)';
+
+
+   const answers = ['yes', 'no', 'maybe', 'stars says no', 'definitely not', 'spirits say yes', 'try again'];
+
+
+   const getRandomAnswer = () => {
+     const randomIndex = Math.floor(Math.random() * answers.length);
+     return answers[randomIndex];
+   };
+
+
+   button.addEventListener('click', () => {
+     const randomAnswer = getRandomAnswer();
+     answerDisplay.textContent = randomAnswer;
+   });
+
+
+   document.addEventListener("DOMContentLoaded", (event) => {
+     document.body.style.backgroundColor = 'black';
+     document.body.appendChild(magicBallContainer);
+     magicBallContainer.appendChild(text);
+     magicBallContainer.appendChild(magicBall);
+     magicBall.appendChild(answerDisplay);
+     magicBallContainer.appendChild(button);
+   });
+ </script>
+</body>
+</html>

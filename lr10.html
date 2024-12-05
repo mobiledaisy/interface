@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Casino</title>
+ <link rel="stylesheet" href="style_casino.css">
+ <style>
+  body {
+    background-image: url('./wallpaper.jpg');
+  }
+  a {
+    text-decoration: none;
+    color: white;
+   }
+ </style>
+</head>
+<body>
+ <div class="game-container">
+   <h1>Hello, <span id="playerName"></span>!</h1>
+   <span id="attemptCount">Attempts: 0</span></p>
+   <div class="container">
+     <div class="row">
+       <div class="item"></div>
+       <div class="item"></div>
+       <div class="item"></div>
+     </div>
+     <div class="row">
+       <div class="item"></div>
+       <div class="item"></div>
+       <div class="item"></div>
+     </div>
+     <div class="row">
+       <div class="item"></div>
+       <div class="item"></div>
+       <div class="item"></div>
+     </div>
+   </div>
+   <div class="text-container">
+     <p id="resultMessage"></p>
+     <button id="startGameButton">Play</button>
+     <button> <a href="./index.html">Home</a></button>
+     <button id="restartGameButton" style="display: none;">Restart</button>
+   </div>
+ </div>
+
+
+ <script src="script.js"></script>
+</body>
+</html>
